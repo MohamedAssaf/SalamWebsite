@@ -1,10 +1,12 @@
 import './App.css';
-import { Main } from './Components/Pages';
-
+import { Main } from './Resources/Pages';
+import { RecoilRoot } from 'recoil';
 
 function App() {
   return (
-    <Main />
+    <RecoilRoot>
+      <Main />      
+    </RecoilRoot>
   );
 }
 
