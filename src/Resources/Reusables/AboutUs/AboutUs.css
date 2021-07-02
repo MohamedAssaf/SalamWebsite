@@ -1,0 +1,15 @@
+.about-us {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 70vw;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  margin-bottom: 20vh;
+}
+
+.about-us-desc {
+  color: gray;
+}

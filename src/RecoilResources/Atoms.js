@@ -6,7 +6,6 @@ export const websiteDirectionState = atom({
 });
 
 export const websiteLanguageState = atom({
-    key: "websiteLanguageState", // unique ID (with respect to other atoms/selectors)
-    default: "en", // default value (aka initial value)
-  });
-  
+  key: "websiteLanguageState", // unique ID (with respect to other atoms/selectors)
+  default: "en", // default value (aka initial value)
+});

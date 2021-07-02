@@ -25,7 +25,7 @@ let TextButton = function () {
 
   return (
     <div className="language" onClick={changeWebsiteDirection}>
-      <p className="lang-button">{language === "ar" ? "عربي" : "English"}</p>
+      <p className="lang-button">{language === "en" ? "عربي" : "English"}</p>
     </div>
   );
 };
