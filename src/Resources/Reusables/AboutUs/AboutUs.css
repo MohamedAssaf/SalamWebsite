@@ -13,3 +13,22 @@
 .about-us-desc {
   color: gray;
 }
+.centered-dual-about-us{
+  margin-left:17%
+}
+.story-video{
+box-shadow: 9px 8px 2px grey;
+}
+@media only screen   
+and (min-device-width : 768px) {
+  .about-us-desc  {
+    font-size: larger;
+  }
+}
+
+@media only screen   
+and (max-device-width : 768px) {
+  .story-video{
+
+}
+}

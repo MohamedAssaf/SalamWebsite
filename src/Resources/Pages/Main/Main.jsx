@@ -5,7 +5,10 @@ import "./Main.css";
 import { useRecoilState } from "recoil";
 import { websiteLanguageState } from "../../../RecoilResources/Atoms";
 import { getLanguagePhrase } from "../../../Utilities/Helpers";
-import { AboutUs } from "../../Reusables";
+import { AboutUs, DualAboutUs } from "../../Reusables";
+import { SignUpBar } from "../../Components";
+import visionLogo from '../../../Assets/vision.jpeg';
+import missionLogo from '../../../Assets/mission.png';
 const Main = function () {
   const [lang] = useRecoilState(websiteLanguageState);
   return (
@@ -13,7 +16,7 @@ const Main = function () {
       className="Body"
       style={{
         backgroundImage: `url(${backgroundDot})`,
-        backgroundSize: "50px"
+        backgroundSize: "50px",
       }}
     >
       <div className="intro">
@@ -21,10 +24,27 @@ const Main = function () {
         <br />
         <p className="sub-text">{getLanguagePhrase(lang, "contactUs")}</p>
       </div>
-      <AboutUs title={getLanguagePhrase(lang, "WhatsSalam")} description={getLanguagePhrase(lang, "SalamIs")} />
-      <AboutUs title={getLanguagePhrase(lang, "HowAreYouFunded")} description={getLanguagePhrase(lang, "FundedBy")} />
-      <AboutUs title={getLanguagePhrase(lang, "HowCanYouPersistThis")} description={getLanguagePhrase(lang, "Future")} />
-      <AboutUs title={getLanguagePhrase(lang, "WhoandWhy")} description={getLanguagePhrase(lang, "Founder")} />
+      <SignUpBar />
+      <AboutUs
+        title={getLanguagePhrase(lang, "WhatsSalam")}
+        description={getLanguagePhrase(lang, "SalamIs")}
+      />
+      <DualAboutUs
+        theAbouts={[
+          {
+            title: getLanguagePhrase(lang, "Mission"),
+            description: getLanguagePhrase(lang, "MissionPhrase"),
+            icon: missionLogo
+          },
+          {
+            title: getLanguagePhrase(lang, "Vision"),
+            description: getLanguagePhrase(lang, "VisionPhrase"),
+            icon: visionLogo
+          },
+        ]}
+      />
+      <SignUpBar />
+
     </div>
   );
 };
