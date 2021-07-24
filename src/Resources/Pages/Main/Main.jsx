@@ -7,8 +7,8 @@ import { websiteLanguageState } from "../../../RecoilResources/Atoms";
 import { getLanguagePhrase } from "../../../Utilities/Helpers";
 import { AboutUs, DualAboutUs } from "../../Reusables";
 import { SignUpBar } from "../../Components";
-import visionLogo from '../../../Assets/vision.jpeg';
-import missionLogo from '../../../Assets/mission.png';
+import visionLogo from '../../../Assets/roundWorldResize.png';
+import missionLogo from '../../../Assets/mission.jpeg';
 const Main = function () {
   const [lang] = useRecoilState(websiteLanguageState);
   return (

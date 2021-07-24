@@ -1,6 +1,7 @@
 import React from "react";
 import { getLanguageConstant } from "../../../Utilities/Helpers";
 import { useRecoilState } from "recoil";
+import { Link } from "react-router-dom";
 import { websiteLanguageState } from "../../../RecoilResources/Atoms";
 
 import "./SignUpBar.css";
@@ -9,36 +10,33 @@ const SignUpBar = function () {
 
   return (
     <div>
-      <div className="sign-up-title">{getLanguageConstant(lang, "SignUpTitle")}</div>
+      <div className="sign-up-title">
+        {getLanguageConstant(lang, "SignUpTitle")}
+      </div>
       <div
         className="row sign-up-bar"
         style={
-          lang == "en" ? { marginLeft: "25.5%" } : { marginRight: "25.5%" }
+          lang === "en" ? { marginLeft: "25.5%" } : { marginRight: "25.5%" }
         }
       >
-        <div
-          className="col-md-4 sign-up-div"
-          onClick={() => {
-            console.log("In Sign Up Shit");
-          }}
-        >
-          <p className="sign-up-button">{getLanguageConstant(lang, "Volunteer")} </p>
+        <div className="col-md-4 sign-up-div">
+          <p className="sign-up-button">
+            <Link to="/sign_up?type=0" className="sign_up_link">
+              {getLanguageConstant(lang, "Volunteer")}{" "}
+            </Link>
+          </p>
         </div>
-        <div
-          className="col-md-4 sign-up-div"
-          onClick={() => {
-            console.log("In Sign Up Shit");
-          }}
-        >
-          <p className="sign-up-button">  {getLanguageConstant(lang, "Disabled")}</p>
+        <div className="col-md-4 sign-up-div">
+          <p className="sign-up-button">
+            <Link to="/sign_up?type=1"  className="sign_up_link"> {getLanguageConstant(lang, "Disabled")}</Link>
+          </p>
         </div>
-        <div
-          className="col-md-4 sign-up-div"
-          onClick={() => {
-            console.log("In Sign Up Shit");
-          }}
-        >
-          <p className="sign-up-button">{getLanguageConstant(lang, "CharityInstitution")} </p>
+        <div className="col-md-4 sign-up-div">
+          <p className="sign-up-button">
+            <Link to="/sign_up?type=2" className="sign_up_link">
+              {getLanguageConstant(lang, "CharityInstitution")}
+            </Link>
+          </p>
         </div>
       </div>
     </div>

@@ -8,6 +8,22 @@ export const englishConstants = {
   Volunteer: "Volunteer",
   Disabled: "Disabled Person",
   CharityInstitution: "Charity Institution",
+  Name:"Name",
+  NamePlaceHolder:"Enter Name seperated by spaces for example : Sharukhan Elbetengany ",
+  Password:"Password",
+  PasswordPlaceHolder:"Enter Password, A password must have a special character, letter and number example : OreoMadness94!",
+  Email:"Email",
+  EmailPlaceHolder:"Enter email, An email example is : email@example.duhh ",
+  PhoneNumber: "PhoneNumber", 
+  PhoneNumberPlaceHolder: "Enter Phone, example +20100000000 (can't think of a joke here)",
+  ReferralCode: "Referral Code",
+  ReferralCodePlaceHolder: "Enter code",
+  UploadIdFront: "Upload Id (Front Side)",
+  UploadIdBack: "Upload Id (Back side)",
+  FbProfileLink: "Fb Profile Link",
+  FbPlaceHolder: "75% of salam users believe that having a fb link is safer",
+  DisablityProof: "A Proof of disabilty for example كارنيه الخدمات المتاكملة or شهادة التأهيل",
+  ProofApology: "We're sorry we have to ask for proof but it's to ensure the safety of all parties. We hope you understand."
 };
 
 export const arabicConstants = {
@@ -20,4 +36,21 @@ export const arabicConstants = {
   Volunteer: "متطوع",
   Disabled: "أصحاب الهمم",
   CharityInstitution: " جمعية خيرية",
+  Name:"الأسم",
+  NamePlaceHolder:"أدخل الأسم بمسافات مابين الأسامي مثلا: شاروخان البتجاني",
+  Password:"كلمة السر",
+  PasswordPlaceHolder:" أدخل كلمة السر محتوية على علامة مميزة و حروف و أرقام مثلا Mohamed1!",
+  Email:"البريد الألكتروني",
+  EmailPlaceHolder:"أدخل البريد الألكتروني, مثلا fa3elKheir@Salam.com",
+  PhoneNumber: "رقم التليفون", 
+  PhoneNumberPlaceHolder: "أدخل رقم التليفون زي كدة 01000000000",
+  ReferralCode: "كود الاضافة",
+  ReferralCodePlaceHolder: "ادخل الكود",
+  UploadIdFront: "صورة البطاقة من قدام",
+  UploadIdBack: "صورة البطاقة من ظهرها",
+  FbProfileLink: "لينك حساب الفيسبوك الخاص بيك",
+  FbPlaceHolder: "75% من مستخدمي سلام شايفين ان وجود حساب فيسبوك هيطمنهم من ناحيتك أكتر",
+  DisablityProof: "اثبات أنكم من أصحاب الهمم ممكن كارنيه الخدمات المتاكملة أو شهادة التأهيل",
+  ProofApology: "بنعتذر على اننا بنطلب اثبات بس علشان نضمن أمن جميع الأطراف. نتمني أنكم تكونوا متفهمين."
 };
+

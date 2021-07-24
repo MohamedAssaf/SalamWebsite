@@ -10,7 +10,7 @@ function renderTitleWithIcon(title, icon) {
           <h1> {title} </h1>
         </div>
         <div className="col-md-2">
-          <img src={icon} width={40} />
+          <img src={icon} width={40} alt="Icon"/>
         </div>
       </div>
     );

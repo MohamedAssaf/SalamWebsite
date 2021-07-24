@@ -13,8 +13,8 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/faqs">
-            <Main />
+          <Route path="/sign_up">
+            <SignUp />
           </Route>
           <Route path="/">
             <Main />
