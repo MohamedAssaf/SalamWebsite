@@ -54,6 +54,7 @@ const CharityInstitutionForm = function () {
       setErrors(errorsObj);
       return;
     }
+    
   };
 
   return (
