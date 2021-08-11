@@ -7,21 +7,23 @@ import { RecoilRoot } from "recoil";
 function App() {
   return (
     <RecoilRoot>
-      <Header className="header"></Header>
-      <Router className="body">
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/sign_up">
-            <SignUp />
-          </Route>
-          <Route path="/">
-            <Main />
-          </Route>
-        </Switch>
-      </Router>
-      <Footer className="footer"></Footer>
+      <div className="root-view">
+        <Header className="header"></Header>
+        <Router className="body">
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/sign_up">
+              <SignUp />
+            </Route>
+            <Route path="/">
+              <Main />
+            </Route>
+          </Switch>
+        </Router>
+        <Footer className="footer"></Footer>
+      </div>
     </RecoilRoot>
   );
 }

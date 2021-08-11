@@ -9,3 +9,6 @@
 .footer {
     height: 5vh;
 }
+.root-view{
+    overflow: hidden;
+}

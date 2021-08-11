@@ -9,6 +9,7 @@
     color: #832685;
     font-size: calc(7px + 1vmin);
     background-color: white;
+    z-index: 1000;
   }
 
   .header-logo{

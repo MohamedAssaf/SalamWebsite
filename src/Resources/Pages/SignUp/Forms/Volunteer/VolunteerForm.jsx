@@ -10,6 +10,10 @@ import { useRecoilState } from "recoil";
 import { useState } from "react";
 import * as validator from "../../../../../Utilities/Validators";
 import * as _ from "lodash";
+import {
+  signUp
+} from "../../../../../Utilities/Firebase";
+import { v4 as uuidv4 } from "uuid";
 
 const VolunteerForm = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -20,43 +24,40 @@ const VolunteerForm = function () {
   const [phone, setPhone] = useState("");
   const [fbLink, setFbLink] = useState("");
   const [errors, setErrors] = useState({});
+  const [idFront, setIdFront] = useState({});
+  const [idBack, setIdBack] = useState({});
 
   const hasError = (field) => {
     return errors[field];
   };
 
-  const submit = () => {
+  const submit = async () => {
     let errorsObj = {};
     if (validator.validateName(name).status == 0) {
-      //TODO get error from language
       errorsObj.name = getLanguageError(
         lang,
         validator.validateName(name).error
       );
     }
     if (validator.validateEmail(email).status == 0) {
-      //TODO get error from language
       errorsObj.email = getLanguageError(
         lang,
         validator.validateEmail(email).error
       );
     }
     if (validator.validatePhoneNumber(phone).status == 0) {
-      //TODO get error from language
       errorsObj.phone = getLanguageError(
         lang,
         validator.validatePhoneNumber(phone).error
       );
     }
     if (validator.validatePassword(password).status == 0) {
-      //TODO get error from language
       errorsObj.password = getLanguageError(
         lang,
         validator.validatePassword(password).error
       );
     }
     if (validator.validateReferralCode(code).status == 0) {
-      //TODO get error from language
       errorsObj.code = getLanguageError(
         lang,
         validator.validateReferralCode(code).error
@@ -68,16 +69,31 @@ const VolunteerForm = function () {
     }
 
     let signUpObj = {
-      lang,
       name,
       email,
       password,
       code,
       phone,
       fbLink,
-      type: 0
+      type: 0,
+      status: 2,
     };
-
+    let filesArray = [];
+    if (validator.validateFile(idFront).status == 1) {
+      filesArray.push({
+        name: uuidv4() + idFront.name,
+        file: idFront,
+        id: "idFront",
+      });
+    }
+    if (validator.validateFile(idBack).status == 1) {
+      filesArray.push({
+        name: uuidv4() + idBack.name,
+        file: idBack,
+        id: "idBack",
+      });
+    }
+    await signUp(signUpObj, filesArray);
   };
 
   return (
@@ -204,6 +220,8 @@ const VolunteerForm = function () {
                 className="custom-file-input"
                 id="inputGroupFile01"
                 aria-describedby="inputGroupFileAddon01"
+                onChange={(e) => setIdFront(e.target.files[0])}
+                accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
                 Choose file
@@ -222,6 +240,8 @@ const VolunteerForm = function () {
                 className="custom-file-input"
                 id="inputGroupFile01"
                 aria-describedby="inputGroupFileAddon01"
+                onChange={(e) => setIdBack(e.target.files[0])}
+                accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
                 Choose file
@@ -229,6 +249,7 @@ const VolunteerForm = function () {
             </div>
           </div>
         </Form.Group>
+
         <Button variant="primary" onClick={submit}>
           Submit
         </Button>

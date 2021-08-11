@@ -31,7 +31,6 @@ const Header = function () {
               <Nav.Link href="home">{getLanguageConstant(lang, "Home")}</Nav.Link>
               <Nav.Link href="about">{getLanguageConstant(lang, "AboutUs")}</Nav.Link>
               <LanguageButton />
-
             </Nav>
             <Nav>
             </Nav>

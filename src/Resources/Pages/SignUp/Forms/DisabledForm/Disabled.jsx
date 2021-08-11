@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import { useState } from "react";
 import * as validator from "../../../../../Utilities/Validators";
 import * as _ from "lodash";
+import { v4 as uuidv4 } from "uuid";
 
 const DisabledForm = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -19,7 +20,10 @@ const DisabledForm = function () {
   const [phone, setPhone] = useState("");
   const [fbLink, setFbLink] = useState("");
   const [errors, setErrors] = useState({});
-
+  const [idFront, setIdFront] = useState({});
+  const [idBack, setIdBack] = useState({});
+  const [disabilityProof, setDisabilityProof] = useState({});
+  
   const hasError = (field) => {
     return errors[field];
   };
@@ -50,10 +54,37 @@ const DisabledForm = function () {
         validator.validatePassword(password).error
       );
     }
+    console.log(disabilityProof)
+    if(validator.validateFile(disabilityProof).status == 0){
+      errorsObj.disabilityProof = getLanguageError(
+        lang,
+        validator.validateFile(disabilityProof).error
+      );
+    }
     if (!_.isEmpty(errorsObj)) {
       setErrors(errorsObj);
       return;
     }
+    let filesArray = [];
+    filesArray.push({
+      name: uuidv4() + disabilityProof.name,
+      file: disabilityProof,
+      id: "disabilityProof",
+    });
+    if (validator.validateFile(idFront).status == 1) {
+      filesArray.push({
+        name: uuidv4() + idFront.name,
+        file: idFront,
+        id: "idFront",
+      });
+    }
+    if (validator.validateFile(idBack).status == 1) {
+      filesArray.push({
+        name: uuidv4() + idBack.name,
+        file: idBack,
+        id: "idBack",
+      });
+    } 
   };
 
   return (
@@ -161,6 +192,8 @@ const DisabledForm = function () {
               className="custom-file-input"
               id="inputGroupFile01"
               aria-describedby="inputGroupFileAddon01"
+              onChange={(e) => setIdFront(e.target.files[0])}
+              accept="image/*"
             />
             <label className="custom-file-label" htmlFor="inputGroupFile01">
               Choose file
@@ -179,6 +212,8 @@ const DisabledForm = function () {
               className="custom-file-input"
               id="inputGroupFile01"
               aria-describedby="inputGroupFileAddon01"
+              onChange={(e) => setIdBack(e.target.files[0])}
+              accept="image/*"
             />
             <label className="custom-file-label" htmlFor="inputGroupFile01">
               Choose file
@@ -189,22 +224,29 @@ const DisabledForm = function () {
 
       <Form.Group className="mb-3" controlId="formReferralCode">
         <Form.Label> {getLanguageConstant(lang, "DisablityProof")} </Form.Label>
-        <Form.Text className="text-mute">
+        <Form.Text className={hasError("disabilityProof") ? "text-mute file-error" : "text-mute"}>
             {getLanguageConstant(lang, "ProofApology")}
           </Form.Text>
         <div className="input-group">
           <div className="custom-file">
             <input
               type="file"
-              className="custom-file-input"
               id="inputGroupFile01"
               aria-describedby="inputGroupFileAddon01"
+              onChange={(e) => setDisabilityProof(e.target.files[0])}
+              className="custom-file-input"
+              accept="image/*"
             />
             <label className="custom-file-label" htmlFor="inputGroupFile01">
               Choose file
             </label>
           </div>
         </div>
+        {hasError("disabilityProof") && (
+          <Form.Text className="text-mute err-message">
+            {errors.disabilityProof}
+          </Form.Text>
+        )}
       </Form.Group>
 
 

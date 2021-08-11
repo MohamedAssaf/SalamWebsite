@@ -16,10 +16,14 @@ let TextButton = function () {
       document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
       setWebsiteDirectionState("rtl");
       setWebsiteLanguageState("ar");
+      window.sessionStorage.setItem("websiteDirectionState", "rtl");
+      window.sessionStorage.setItem("websiteLanguageState", "ar");
     } else {
       document.getElementsByTagName("html")[0].setAttribute("dir", "ltr");
       setWebsiteDirectionState("ltr");
       setWebsiteLanguageState("en");
+      window.sessionStorage.setItem("websiteDirectionState", "ltr");
+      window.sessionStorage.setItem("websiteLanguageState", "en");
     }
   };
 

@@ -1,5 +1,5 @@
 import "./CharityInstitution.css";
-import Charity from "../../../../../Assets/Charity.jpg";
+import Charity from "../../../../../Assets/Charity.jpeg";
 import { Button, Form } from "react-bootstrap";
 import {
   getLanguageError,
@@ -10,6 +10,7 @@ import { useRecoilState } from "recoil";
 import { useState } from "react";
 import * as validator from "../../../../../Utilities/Validators";
 import * as _ from "lodash";
+import { signUp } from "../../../../../Utilities/Firebase";
 
 const CharityInstitutionForm = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -24,7 +25,7 @@ const CharityInstitutionForm = function () {
     return errors[field];
   };
 
-  const submit = () => {
+  const submit = async () => {
     let errorsObj = {};
     if (validator.validateName(name).status == 0) {
       errorsObj.name = getLanguageError(
@@ -54,19 +55,31 @@ const CharityInstitutionForm = function () {
       setErrors(errorsObj);
       return;
     }
-    
+
+    let signUpObj = {
+      name,
+      email,
+      password,
+      phone,
+      fbLink,
+      type: 2,
+      status: 2,
+    };
+
+    await signUp(signUpObj);
+
   };
 
   return (
-    <div className="volunteer-form">
-    <div className="row">
-      <div className="col-md-1"></div>
+    <div className="volunteer-form charity-form">
+    <div className="row ">
+      <div className="col-md-2"></div>
       <div className="sign-up-role col-md-4">
         <h1>{getLanguageConstant(lang, "CharityInstitution")}</h1>
       </div>
       <img
         src={Charity}
-        className="col-md-4"
+        className="col-md-2"
         alt="disabled"
       />
     </div>
