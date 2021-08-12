@@ -8,6 +8,11 @@
     height: 80%;
 }
 
+.sign-up-bar-root-div{
+    display: flex;
+    flex-direction: column;
+}
+
 /* .sign-up-button {
     font-weight: bolder;
     top: 1.2%;
@@ -35,7 +40,7 @@
 .sign-up-bar{
     width: 50%;
     flex-wrap: nowrap !important;
-
+    align-self: center !important;
 }
 
 .sign-up-div{
@@ -65,4 +70,10 @@ and (max-device-width : 768px) {
     flex-direction: column;
     margin-left:21.5%;
   }
+  .sign-up-button{
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 }

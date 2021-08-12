@@ -104,3 +104,16 @@ export let validateFile = (file) => {
     error: "emptyFile",
   };
 };
+
+export let validateGender = (gender) => {
+  if (gender != "") {
+    return {
+      status: 1,
+    };
+  }
+  return {
+    status: 0,
+    error: "emptyGender",
+  };
+};
+

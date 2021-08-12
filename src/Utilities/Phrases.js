@@ -1,6 +1,6 @@
 export const englishPhrases = {
   contactUs: "Contact us at m@salameg.org",
-  WhatsSalam: "What is Salam ?",
+  WhatsSalam: "What's Salam?",
   SalamIs: `Salam is a NPO founded in 2021 that aims to help volunteers find the opportunities they need to give back to the community. 
             Everything you see from website to app to interviews is pure volunteering work. NO ONE GETS PAID IN SALAM.`,
   HowAreYouFunded: "How is Salam Funded?",

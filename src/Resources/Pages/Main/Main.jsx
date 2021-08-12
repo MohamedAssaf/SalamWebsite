@@ -4,13 +4,27 @@ import logo from "../../../Assets/SLogo1.png";
 import "./Main.css";
 import { useRecoilState } from "recoil";
 import { websiteLanguageState } from "../../../RecoilResources/Atoms";
-import { getLanguagePhrase } from "../../../Utilities/Helpers";
+import { getLanguagePhrase, getLanguageConstant } from "../../../Utilities/Helpers";
 import { AboutUs, DualAboutUs } from "../../Reusables";
 import { SignUpBar } from "../../Components";
 import visionLogo from '../../../Assets/roundWorldResize.png';
 import missionLogo from '../../../Assets/mission.jpeg';
+import swal from "sweetalert";
+
 const Main = function () {
   const [lang] = useRecoilState(websiteLanguageState);
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let signedUp = params.get("signedUp");
+
+  if(signedUp){
+    swal(
+      getLanguageConstant(lang, "ThankYou"),
+      getLanguageConstant(lang, "ThankYouBody"),
+      "success"
+    )
+  }
+
   return (
     <div
       className="Body"

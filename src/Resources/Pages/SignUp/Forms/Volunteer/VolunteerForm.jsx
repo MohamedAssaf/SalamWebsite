@@ -10,10 +10,9 @@ import { useRecoilState } from "recoil";
 import { useState } from "react";
 import * as validator from "../../../../../Utilities/Validators";
 import * as _ from "lodash";
-import {
-  signUp
-} from "../../../../../Utilities/Firebase";
+import { signUp } from "../../../../../Utilities/Firebase";
 import { v4 as uuidv4 } from "uuid";
+import { DynamicFormLabel } from "../../../../Reusables";
 
 const VolunteerForm = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -21,11 +20,13 @@ const VolunteerForm = function () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
+  const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
   const [fbLink, setFbLink] = useState("");
   const [errors, setErrors] = useState({});
   const [idFront, setIdFront] = useState({});
   const [idBack, setIdBack] = useState({});
+  const [photo, setPhoto] = useState({});
 
   const hasError = (field) => {
     return errors[field];
@@ -63,6 +64,18 @@ const VolunteerForm = function () {
         validator.validateReferralCode(code).error
       );
     }
+    if (validator.validateGender(gender).status == 0) {
+      errorsObj.gender = getLanguageError(
+        lang,
+        validator.validateGender(gender).error
+      );
+    }
+    if (validator.validateFile(photo).status == 0) {
+      errorsObj.photo = getLanguageError(
+        lang,
+        validator.validateFile(photo).error
+      );
+    }
     if (!_.isEmpty(errorsObj)) {
       setErrors(errorsObj);
       return;
@@ -72,6 +85,7 @@ const VolunteerForm = function () {
       name,
       email,
       password,
+      gender,
       code,
       phone,
       fbLink,
@@ -79,6 +93,12 @@ const VolunteerForm = function () {
       status: 2,
     };
     let filesArray = [];
+    filesArray.push({
+      name: uuidv4() + photo.name,
+      file: photo,
+      id: "photo",
+      path: "Pphotos/",
+    });
     if (validator.validateFile(idFront).status == 1) {
       filesArray.push({
         name: uuidv4() + idFront.name,
@@ -93,7 +113,7 @@ const VolunteerForm = function () {
         id: "idBack",
       });
     }
-    await signUp(signUpObj, filesArray);
+    await signUp(lang, signUpObj, filesArray);
   };
 
   return (
@@ -112,7 +132,10 @@ const VolunteerForm = function () {
       </div>
       <Form className="form-sign-up-labels">
         <Form.Group className="mb-3" controlId="formName">
-          <Form.Label size="sm">{getLanguageConstant(lang, "Name")}</Form.Label>
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "Name")}
+          />{" "}
           <Form.Control
             type="name"
             placeholder={getLanguageConstant(lang, "NamePlaceHolder")}
@@ -129,7 +152,10 @@ const VolunteerForm = function () {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>{getLanguageConstant(lang, "Email")}</Form.Label>
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "Email")}
+          />{" "}
           <Form.Control
             type="email"
             placeholder={getLanguageConstant(lang, "EmailPlaceHolder")}
@@ -146,7 +172,10 @@ const VolunteerForm = function () {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>{getLanguageConstant(lang, "Password")}</Form.Label>
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "Password")}
+          />{" "}
           <Form.Control
             type="password"
             placeholder={getLanguageConstant(lang, "PasswordPlaceHolder")}
@@ -162,8 +191,37 @@ const VolunteerForm = function () {
           )}
         </Form.Group>
 
+        <Form.Group className="mb-3" controlId="formGender">
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "Gender")}
+          />{" "}
+          <Form.Control
+            as="select"
+            value={gender}
+            onChange={(e) => {
+              setGender(e.target.value);
+            }}
+            className={hasError("gender") ? "error" : ""}
+          >
+            <option value="">
+              {getLanguageConstant(lang, "GenderPlaceHolder")}
+            </option>
+            <option value="m">{getLanguageConstant(lang, "Male")}</option>
+            <option value="f">{getLanguageConstant(lang, "Female")}</option>
+          </Form.Control>
+          {hasError("gender") && (
+            <Form.Text className="text-mute err-message">
+              {errors.gender}
+            </Form.Text>
+          )}
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="formPhoneNumber">
-          <Form.Label>{getLanguageConstant(lang, "PhoneNumber")}</Form.Label>
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "PhoneNumber")}
+          />{" "}
           <Form.Control
             type="text"
             placeholder="+201000000000"
@@ -180,7 +238,10 @@ const VolunteerForm = function () {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formReferralCode">
-          <Form.Label>{getLanguageConstant(lang, "ReferralCode")}</Form.Label>
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "ReferralCode")}
+          />
           <Form.Control
             type="referral"
             placeholder={getLanguageConstant(lang, "ReferralCodePlaceHolder")}
@@ -197,7 +258,10 @@ const VolunteerForm = function () {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formReferralCode">
-          <Form.Label>{getLanguageConstant(lang, "FbProfileLink")}</Form.Label>
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "FbProfileLink")}
+          />{" "}
           <Form.Control
             type="link"
             placeholder={getLanguageConstant(lang, "FbPlaceHolder")}
@@ -207,11 +271,42 @@ const VolunteerForm = function () {
           />
         </Form.Group>
 
+        <Form.Group className="mb-3" controlId="formPersonalPhoto">
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "Photo")}
+          />
+          <div
+            className={hasError("code") ? "input-group error" : "input-group"}
+          >
+            <div className="custom-file">
+              <input
+                type="file"
+                id="inputGroupFile01"
+                aria-describedby="inputGroupFileAddon01"
+                onChange={(e) => setPhoto(e.target.files[0])}
+                className="custom-file-input"
+                accept="image/*"
+              />
+              <label className="custom-file-label" htmlFor="inputGroupFile01">
+                {_.isEmpty(photo.name)
+                  ? getLanguageConstant(lang, "ChooseFile")
+                  : photo.name}
+              </label>
+            </div>
+          </div>
+          {hasError("photo") && (
+            <Form.Text className="text-mute err-message">
+              {errors.photo}
+            </Form.Text>
+          )}
+        </Form.Group>
+
         <Form.Group className="mb-3" controlId="formReferralCode">
-          <Form.Label>
-            {" "}
-            {getLanguageConstant(lang, "UploadIdFront")}{" "}
-          </Form.Label>
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "UploadIdFront")}
+          />
 
           <div className="input-group">
             <div className="custom-file">
@@ -224,15 +319,19 @@ const VolunteerForm = function () {
                 accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
-                Choose file
+                {_.isEmpty(idFront.name)
+                  ? getLanguageConstant(lang, "ChooseFile")
+                  : idFront.name}
               </label>
             </div>
           </div>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formReferralCode">
-          <Form.Label> {getLanguageConstant(lang, "UploadIdBack")} </Form.Label>
-
+          <DynamicFormLabel
+            lang={lang}
+            text={getLanguageConstant(lang, "UploadIdBack")}
+          />
           <div className="input-group">
             <div className="custom-file">
               <input
@@ -244,7 +343,9 @@ const VolunteerForm = function () {
                 accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
-                Choose file
+                {_.isEmpty(idBack.name)
+                  ? getLanguageConstant(lang, "ChooseFile")
+                  : idBack.name}
               </label>
             </div>
           </div>

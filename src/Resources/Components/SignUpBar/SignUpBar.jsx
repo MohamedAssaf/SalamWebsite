@@ -9,15 +9,12 @@ const SignUpBar = function () {
   const [lang] = useRecoilState(websiteLanguageState);
 
   return (
-    <div>
+    <div className="sign-up-bar-root-div">
       <div className="sign-up-title">
         {getLanguageConstant(lang, "SignUpTitle")}
       </div>
       <div
         className="row sign-up-bar"
-        style={
-          lang === "en" ? { marginLeft: "25.5%" } : { marginRight: "25.5%" }
-        }
       >
         <div className="col-md-4 sign-up-div">
           <p className="sign-up-button">

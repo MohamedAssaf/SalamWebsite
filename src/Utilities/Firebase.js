@@ -5,6 +5,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 import swal from "sweetalert";
+import { getLanguageError } from "../Utilities/Helpers";
 
 let firebaseConfig = {
   apiKey: "AIzaSyAlmJoTiSW7W_s6BDy5Z-MakNTdovzAp9s",
@@ -22,7 +23,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
 
-export const signUp = async (form, files = []) => {
+export const signUp = async (lang, form, files = []) => {
   firebase
     .auth()
     .createUserWithEmailAndPassword(form.email, form.password)
@@ -32,8 +33,13 @@ export const signUp = async (form, files = []) => {
       if (files.length > 0) {
         let promisesArray = [];
         files?.forEach((file) => {
-          var storageRef = storage.ref("images/" + file.name);
-          promisesArray.push(storageRef.put(file.file));
+          if (file.path) {
+            var storageRef = storage.ref(file.path + file.name);
+            promisesArray.push(storageRef.put(file.file));
+          } else {
+            let storageRef = storage.ref("images/" + file.name);
+            promisesArray.push(storageRef.put(file.file));
+          }
         });
         Promise.all(promisesArray).then((results) => {
           let urlsPromisesArray = [];
@@ -49,15 +55,15 @@ export const signUp = async (form, files = []) => {
               .set(form, { merge: true })
               .then(() => {
                 console.log("Document successfully written!");
-                swal(
-                  "Thank you so much!",
-                  "Yor application will be reviewed and someone from our team will contact you",
-                  "success"
-                );
-                window.location = "/home";
+                window.location = "/home?signedUp=true";
               })
               .catch((error) => {
-                alert(error);
+                let errorMessage =
+                  lang == "ar"
+                    ? getLanguageError(lang, error.code)
+                    : error.message;
+                console.log(error);
+                swal(errorMessage, "", "error");
                 console.error("Error writing document: ", error);
               });
           });
@@ -68,26 +74,23 @@ export const signUp = async (form, files = []) => {
           .set(form, { merge: true })
           .then(() => {
             console.log("Document successfully written!");
-            window.location = "/home";
-            setTimeout(
-              () =>
-                swal(
-                  "Thank you so much!",
-                  "Yor application will be reviewed and someone from our team will contact you",
-                  "success"
-                ),
-              1000
-            );
+            window.location = "/home?signedUp=true";
           })
           .catch((error) => {
-            alert(error);
+            let errorMessage =
+              lang == "ar" ? getLanguageError(lang, error.code) : error.message;
+            console.log(error);
+            swal(errorMessage, "", "error");
             console.error("Error writing document: ", error);
           });
       }
     })
     .catch((error) => {
-      let errorCode = error.code;
-      let errorMessage = error.message;
+      let errorMessage =
+        lang == "ar" ? getLanguageError(lang, error.code) : error.message;
       // ..
+      console.log(error);
+
+      swal(errorMessage, "", "error");
     });
 };

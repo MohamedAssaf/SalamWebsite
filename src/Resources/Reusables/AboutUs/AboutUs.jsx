@@ -21,7 +21,6 @@ function renderTitleWithIcon(title, icon) {
 
 function AboutUs({ title, description, dual, video, icon }) {
   const isTabletOrMobile = useMediaQuery({ query: "(min-width: 768px)" });
-
   if (video) {
     return (
       <div

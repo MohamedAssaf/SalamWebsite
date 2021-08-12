@@ -9,7 +9,8 @@ export const englishErrors = {
     passwordShort: "Password has to be 8 characters at least",
     invalidPassword: "Password invalid, password has to have a special character, number, characters ",
     emptyCode: "Code is empty",
-    emptyFile: "You did not upload a file"
+    emptyFile: "You did not upload a file",
+    emptyGender: "No Gender is selected"
   };
   
   export const arabicErrors = {
@@ -23,7 +24,9 @@ export const englishErrors = {
     passwordShort: "كلمة السر لازم أن تكون 8 حروف على الأقل",
     invalidPassword: "كلمة السر غير صالحة, لازم تتكون من أرقام, علامات مميزة زي التعجب مثلا و حروف",
     emptyCode: "الكود فاضي",
-    emptyFile: "لو سمحت ارفق الملف هنا"
+    emptyFile: "لو سمحت ارفق الملف هنا",
+    emptyGender: "لم يتم اختيار نوع",
+    "auth/email-already-in-use": "هذا البريد مستخدم من قبل"
 
   };
   
