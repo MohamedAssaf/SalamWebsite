@@ -55,6 +55,19 @@ export const signUp = async (lang, form, files = []) => {
               .set(form, { merge: true })
               .then(() => {
                 console.log("Document successfully written!");
+                if (form.type == 0) {
+                  const codeRef = db.collection("codes").doc(form.codeId);
+                  codeRef
+                    .update({ used: true })
+                    .then((res) => {
+                      console.log(res);
+                      console.log("Updated code successfully");
+                      window.location = "/home?signedUp=true";
+                    })
+                    .catch((e) => {
+                      console.log("error", e.message);
+                    });
+                }
                 window.location = "/home?signedUp=true";
               })
               .catch((error) => {
@@ -93,4 +106,22 @@ export const signUp = async (lang, form, files = []) => {
 
       swal(errorMessage, "", "error");
     });
+};
+
+export const getCode = async (code) => {
+  let codesRef = await db
+    .collection("codes")
+    .where("code", "==", code)
+    .limit(1);
+  codesRef = await codesRef.get();
+  if (codesRef.docs?.length >= 1) {
+    let data = {};
+    codesRef.forEach((doc) => {
+      data = doc.data();
+      data.id = doc.id;
+    });
+    return data;
+  } else {
+    return false;
+  }
 };

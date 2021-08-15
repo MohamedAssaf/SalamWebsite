@@ -1,17 +1,19 @@
 import "./CharityInstitution.css";
 import Charity from "../../../../../Assets/Charity.jpeg";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import {
   getLanguageError,
   getLanguageConstant,
 } from "../../../../../Utilities/Helpers";
 import { websiteLanguageState } from "../../../../../RecoilResources/Atoms";
 import { useRecoilState } from "recoil";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as validator from "../../../../../Utilities/Validators";
 import * as _ from "lodash";
 import { signUp } from "../../../../../Utilities/Firebase";
 import { DynamicFormLabel } from "../../../../Reusables";
+import Loader from "react-loader-spinner";
+import { result } from "lodash";
 
 const CharityInstitutionForm = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -21,12 +23,14 @@ const CharityInstitutionForm = function () {
   const [phone, setPhone] = useState("");
   const [fbLink, setFbLink] = useState("");
   const [errors, setErrors] = useState({});
+  const [show, setShow] = useState(false);
 
   const hasError = (field) => {
     return errors[field];
   };
 
   const submit = async () => {
+    setShow(true);
     let errorsObj = {};
     if (validator.validateName(name).status == 0) {
       errorsObj.name = getLanguageError(
@@ -54,6 +58,7 @@ const CharityInstitutionForm = function () {
     }
     if (!_.isEmpty(errorsObj)) {
       setErrors(errorsObj);
+      setShow(false);
       return;
     }
 
@@ -68,10 +73,26 @@ const CharityInstitutionForm = function () {
     };
 
     await signUp(lang, signUpObj);
+    setShow(false);
   };
 
   return (
     <div className="volunteer-form charity-form">
+      <Modal show={show} backdrop="static" keyboard={false}>
+        <Modal.Body className="modal-body-charity">
+          Salam!
+          <br />
+          <Loader
+            type="MutatingDots"
+            color="#832685"
+            secondaryColor="#1ac8dc"
+            height={100}
+            width={100}
+          />
+          <br />
+          Please wait while we validate your data
+        </Modal.Body>
+      </Modal>
       <div className="row ">
         <div className="col-md-3"></div>
         <div className="sign-up-role col-md-4">

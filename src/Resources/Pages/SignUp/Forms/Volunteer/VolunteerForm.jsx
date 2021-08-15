@@ -1,6 +1,6 @@
 import "./VolunteerForm.css";
 import volunteer from "../../../../../Assets/Volunteer.png";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import {
   getLanguageError,
   getLanguageConstant,
@@ -13,6 +13,7 @@ import * as _ from "lodash";
 import { signUp } from "../../../../../Utilities/Firebase";
 import { v4 as uuidv4 } from "uuid";
 import { DynamicFormLabel } from "../../../../Reusables";
+import Loader from "react-loader-spinner";
 
 const VolunteerForm = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -27,13 +28,17 @@ const VolunteerForm = function () {
   const [idFront, setIdFront] = useState({});
   const [idBack, setIdBack] = useState({});
   const [photo, setPhoto] = useState({});
+  const [show, setShow] = useState(false);
 
   const hasError = (field) => {
     return errors[field];
   };
 
   const submit = async () => {
+    setShow(true);
     let errorsObj = {};
+    let codeCheck = await validator.validateInvitationCode(code);
+    console.log(codeCheck);
     if (validator.validateName(name).status == 0) {
       errorsObj.name = getLanguageError(
         lang,
@@ -58,17 +63,17 @@ const VolunteerForm = function () {
         validator.validatePassword(password).error
       );
     }
-    if (validator.validateReferralCode(code).status == 0) {
-      errorsObj.code = getLanguageError(
-        lang,
-        validator.validateReferralCode(code).error
-      );
+    if (codeCheck.status == 0) {
+      errorsObj.code = getLanguageError(lang, codeCheck.error);
     }
     if (validator.validateGender(gender).status == 0) {
       errorsObj.gender = getLanguageError(
         lang,
         validator.validateGender(gender).error
       );
+    }
+    if (codeCheck.status == 0) {
+      errorsObj.code = getLanguageError(lang, codeCheck.error);
     }
     if (validator.validateFile(photo).status == 0) {
       errorsObj.photo = getLanguageError(
@@ -78,6 +83,7 @@ const VolunteerForm = function () {
     }
     if (!_.isEmpty(errorsObj)) {
       setErrors(errorsObj);
+      setShow(false);
       return;
     }
 
@@ -91,6 +97,7 @@ const VolunteerForm = function () {
       fbLink,
       type: 0,
       status: 2,
+      codeId: codeCheck.data,
     };
     let filesArray = [];
     filesArray.push({
@@ -114,10 +121,26 @@ const VolunteerForm = function () {
       });
     }
     await signUp(lang, signUpObj, filesArray);
+    setShow(false);
   };
 
   return (
     <div className="volunteer-form">
+      <Modal show={show} backdrop="static" keyboard={false}>
+        <Modal.Body className="modal-body-volunteer">
+          Salam!
+          <br />
+          <Loader
+            type="MutatingDots"
+            color="#832685"
+            secondaryColor="#1ac8dc"
+            height={100}
+            width={100}
+          />
+          <br />
+          Please wait while we validate your data
+        </Modal.Body>
+      </Modal>
       <div className="row">
         <div className="col-md-3"></div>
         <div className="sign-up-role col-md-4">
@@ -130,6 +153,7 @@ const VolunteerForm = function () {
           alt="volunteer"
         />
       </div>
+
       <Form className="form-sign-up-labels">
         <Form.Group className="mb-3" controlId="formName">
           <DynamicFormLabel

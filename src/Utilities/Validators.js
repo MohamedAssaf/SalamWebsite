@@ -1,4 +1,5 @@
 import * as _ from "lodash";
+import { getCode } from "./Firebase";
 
 export let validateName = (name) => {
   if (name && name.length > 0) {
@@ -34,7 +35,7 @@ export let validateEmail = (email) => {
 export let validatePhoneNumber = (number) => {
   if (number && number.length > 0) {
     if (number.length != 10) {
-      let re = new RegExp("^[0-9]+$")
+      let re = new RegExp("^[0-9]+$");
       if (re.test(String(number))) {
         return {
           status: 1,
@@ -58,8 +59,10 @@ export let validatePhoneNumber = (number) => {
 
 export let validatePassword = (password) => {
   if (password && password.length > 0) {
-    if (password.length > 8) {
-      let re = new RegExp('^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*d)(?=.*[!#$%&? "]).*$')
+    if (password.length >= 8) {
+      let re = new RegExp(
+        '^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*d)(?=.*[!#$%&? "]).*$'
+      );
       if (re.test(String(password))) {
         return {
           status: 1,
@@ -81,11 +84,28 @@ export let validatePassword = (password) => {
   };
 };
 
-export let validateReferralCode = (code) => {
+export let validateInvitationCode = async (code) => {
   if (code && code.length > 0) {
-    return {
-      status: 1,
-    };
+    let result = await getCode(code);
+    if (result) {
+      console.log(result.used)
+      if (!result.used) {
+        return {
+          status: 0,
+          error: "codeUsed",
+        };
+      } else {
+        return {
+          status: 1,
+          data: result.id
+        };
+      }
+    } else {
+      return {
+        status: 0,
+        error: "invalidCode",
+      };
+    }
   }
   return {
     status: 0,
@@ -116,4 +136,3 @@ export let validateGender = (gender) => {
     error: "emptyGender",
   };
 };
-

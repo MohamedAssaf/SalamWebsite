@@ -1,6 +1,6 @@
 import "./Disabled.css";
 import disabilities from "../../../../../Assets/disabilities.jpg";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import {
   getLanguageError,
   getLanguageConstant,
@@ -13,6 +13,7 @@ import * as _ from "lodash";
 import { v4 as uuidv4 } from "uuid";
 import { DynamicFormLabel } from "../../../../Reusables";
 import { signUp } from "../../../../../Utilities/Firebase";
+import Loader from "react-loader-spinner";
 
 const DisabledForm = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -27,12 +28,14 @@ const DisabledForm = function () {
   const [idBack, setIdBack] = useState({});
   const [disabilityProof, setDisabilityProof] = useState({});
   const [photo, setPhoto] = useState({});
+  const [show, setShow] = useState(false);
 
   const hasError = (field) => {
     return errors[field];
   };
 
   const submit = async () => {
+    setShow(true);
     let errorsObj = {};
     if (validator.validateName(name).status == 0) {
       errorsObj.name = getLanguageError(
@@ -78,6 +81,7 @@ const DisabledForm = function () {
     }
     if (!_.isEmpty(errorsObj)) {
       setErrors(errorsObj);
+      setShow(false);
       return;
     }
     let signUpObj = {
@@ -100,7 +104,7 @@ const DisabledForm = function () {
       name: uuidv4() + photo.name,
       file: photo,
       id: "photo",
-      path: "Pphotos/"
+      path: "Pphotos/",
     });
     if (validator.validateFile(idFront).status == 1) {
       filesArray.push({
@@ -117,10 +121,26 @@ const DisabledForm = function () {
       });
     }
     await signUp(lang, signUpObj, filesArray);
+    setShow(false);
   };
 
   return (
     <div className="volunteer-form">
+      <Modal show={show} backdrop="static" keyboard={false}>
+        <Modal.Body className="modal-body-disabled">
+          Salam!
+          <br />
+          <Loader
+            type="MutatingDots"
+            color="#832685"
+            secondaryColor="#1ac8dc"
+            height={100}
+            width={100}
+          />
+          <br />
+          Please wait while we validate your data
+        </Modal.Body>
+      </Modal>
       <div className="row">
         <div className="col-md-1"></div>
         <div className="sign-up-role col-md-4">
@@ -201,10 +221,11 @@ const DisabledForm = function () {
               setGender(e.target.value);
             }}
             className={hasError("gender") ? "error" : ""}
-
           >
-            <option value="">{getLanguageConstant(lang, "GenderPlaceHolder")}</option>
-            <option value="m">{getLanguageConstant(lang, "Male")}</option> 
+            <option value="">
+              {getLanguageConstant(lang, "GenderPlaceHolder")}
+            </option>
+            <option value="m">{getLanguageConstant(lang, "Male")}</option>
             <option value="f">{getLanguageConstant(lang, "Female")}</option>
           </Form.Control>
           {hasError("gender") && (
@@ -253,7 +274,9 @@ const DisabledForm = function () {
             lang={lang}
             text={getLanguageConstant(lang, "Photo")}
           />
-          <div className={hasError("photo") ? "input-group error" : "input-group"}>
+          <div
+            className={hasError("photo") ? "input-group error" : "input-group"}
+          >
             <div className="custom-file">
               <input
                 type="file"
@@ -264,7 +287,9 @@ const DisabledForm = function () {
                 accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
-                { _.isEmpty(photo.name) ? getLanguageConstant(lang, "ChooseFile") : photo.name}
+                {_.isEmpty(photo.name)
+                  ? getLanguageConstant(lang, "ChooseFile")
+                  : photo.name}
               </label>
             </div>
           </div>
@@ -298,7 +323,9 @@ const DisabledForm = function () {
                 accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
-                { _.isEmpty(disabilityProof.name) ? getLanguageConstant(lang, "ChooseFile") : disabilityProof.name}
+                {_.isEmpty(disabilityProof.name)
+                  ? getLanguageConstant(lang, "ChooseFile")
+                  : disabilityProof.name}
               </label>
             </div>
           </div>
@@ -326,7 +353,9 @@ const DisabledForm = function () {
                 accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
-                  { _.isEmpty(idFront.name) ? getLanguageConstant(lang, "ChooseFile") : idFront.name}
+                {_.isEmpty(idFront.name)
+                  ? getLanguageConstant(lang, "ChooseFile")
+                  : idFront.name}
               </label>
             </div>
           </div>
@@ -348,7 +377,9 @@ const DisabledForm = function () {
                 accept="image/*"
               />
               <label className="custom-file-label" htmlFor="inputGroupFile01">
-                { _.isEmpty(idBack.name) ? getLanguageConstant(lang, "ChooseFile") : idBack.name}
+                {_.isEmpty(idBack.name)
+                  ? getLanguageConstant(lang, "ChooseFile")
+                  : idBack.name}
               </label>
             </div>
           </div>

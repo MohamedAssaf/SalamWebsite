@@ -10,7 +10,9 @@ export const englishErrors = {
     invalidPassword: "Password invalid, password has to have a special character, number, characters ",
     emptyCode: "Code is empty",
     emptyFile: "You did not upload a file",
-    emptyGender: "No Gender is selected"
+    emptyGender: "No Gender is selected",
+    codeUsed: "This code has been used before",
+    invalidCode: "This code doesn't exist; invalid"
   };
   
   export const arabicErrors = {
@@ -26,7 +28,9 @@ export const englishErrors = {
     emptyCode: "الكود فاضي",
     emptyFile: "لو سمحت ارفق الملف هنا",
     emptyGender: "لم يتم اختيار نوع",
-    "auth/email-already-in-use": "هذا البريد مستخدم من قبل"
+    "auth/email-already-in-use": "هذا البريد مستخدم من قبل",
+    codeUsed: "هذا الكود مستخدم من قبل",
+    invalidCode: "هذا الكود غير صحيح"
 
   };
   
