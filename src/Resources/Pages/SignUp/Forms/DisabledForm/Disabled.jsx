@@ -125,7 +125,7 @@ const DisabledForm = function () {
   };
 
   return (
-    <div className="volunteer-form">
+    <div className="disabled-form">
       <Modal show={show} backdrop="static" keyboard={false}>
         <Modal.Body className="modal-body-disabled">
           Salam!

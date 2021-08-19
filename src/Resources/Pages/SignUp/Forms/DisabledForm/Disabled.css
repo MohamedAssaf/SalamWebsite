@@ -10,3 +10,9 @@
     color: #832685;
     font-family: 'El Messiri', sans-serif;
 }
+
+@media only screen and (max-device-width: 768px) {
+  .disabled-form {
+    width: 90%;
+  }
+}

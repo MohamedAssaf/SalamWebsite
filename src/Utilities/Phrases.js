@@ -1,20 +1,20 @@
 export const englishPhrases = {
   contactUs: "Contact us at m@salameg.org",
   WhatsSalam: "What's Salam?",
-  SalamIs: `Salam is a NPO founded in 2021 that aims to help volunteers find the opportunities they need to give back to the community. 
+  SalamIs: `Salam is an NPO founded in 2021 that aims to help volunteers find the opportunities they need to give back to the community. 
             Everything you see from website to app to interviews is pure volunteering work. NO ONE GETS PAID IN SALAM.`,
   HowAreYouFunded: "How is Salam Funded?",
   FundedBy:
-    "So far any expenses or overheads that come up are paid by the founder. No donations are allowed to avoid any suspition.",
+    "So far any expenses or overheads that come up are paid by the founder. No donations are allowed to avoid any suspicion.",
   HowCanYouPersistThis: "How can Salam ensure sustinance with this model?",
   Future:
-    "Salam can't. Salam's plan is to hand the project over The Ministry of Social Solidarity once things start to get out of hand.(or atleast we really hope thye take it).",
+    "Salam can't. Salam's plan is to hand the project over to The Ministry of Social Solidarity once things start to get out of hand.(or atleast we really hope thye take it).",
   WhoandWhy: "Who is the founder and why did he build Salam?",
-  Founder: `"I'm an Egyptian who works as a fulltime web developer. Allah has granted me with many blessings and a love for volunteering. I was struggling to find volunteering opportunities hence here we are." - Mohamed Assaf`,
+  Founder: `"I'm an Egyptian who works as a fulltime web developer. Allah has granted me many blessings and a love for volunteering. I was struggling to find volunteering opportunities hence here we are." - Mohamed Assaf`,
   Mission: "Mission",
   MissionPhrase: "Helping those who want to give back or make a good use of their time find true, safe and beneficial opportunities.",
   Vision: "Vision",
-  VisionPhrase: "Becoming a hub for safe, trusted and beneficial volunteering opportunities. Encouraging people to give back along the way",
+  VisionPhrase: "Becoming a hub for safe, trusted and beneficial volunteering opportunities. Encouraging people to give back along the way.",
   Story: "Our Story",
   StoryPhrase:"Watch our story in this brief video to understand more about Salam."
 };

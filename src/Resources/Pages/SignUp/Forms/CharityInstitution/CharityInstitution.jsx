@@ -77,7 +77,7 @@ const CharityInstitutionForm = function () {
   };
 
   return (
-    <div className="volunteer-form charity-form">
+    <div className="charity-form">
       <Modal show={show} backdrop="static" keyboard={false}>
         <Modal.Body className="modal-body-charity">
           Salam!

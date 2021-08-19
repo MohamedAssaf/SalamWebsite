@@ -89,7 +89,7 @@ export let validateInvitationCode = async (code) => {
     let result = await getCode(code);
     if (result) {
       console.log(result.used)
-      if (!result.used) {
+      if (result.used) {
         return {
           status: 0,
           error: "codeUsed",
