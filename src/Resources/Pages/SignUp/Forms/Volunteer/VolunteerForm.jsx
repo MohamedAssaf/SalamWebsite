@@ -141,19 +141,19 @@ const VolunteerForm = function () {
           Please wait while we validate your data
         </Modal.Body>
       </Modal>
-      <div className="row">
-        <div className="col-md-3"></div>
-        <div className="sign-up-role col-md-4">
+      <div>
+        <div style={{marginRight: "auto", marginLeft: "auto"}}>
           <h1>{getLanguageConstant(lang, "Volunteer")}</h1>
         </div>
-        <img
-          src={volunteer}
-          height="20%"
-          className="col-md-2"
-          alt="volunteer"
-        />
+        <div>
+          <img
+            src={volunteer}
+            className="col-md-3"
+            alt="volunteer"
+            style={{marginRight: "auto", marginLeft: "auto"}}
+          />
+        </div>
       </div>
-
       <Form className="form-sign-up-labels">
         <Form.Group className="mb-3" controlId="formName">
           <DynamicFormLabel

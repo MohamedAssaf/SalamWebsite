@@ -93,14 +93,15 @@ const CharityInstitutionForm = function () {
           Please wait while we validate your data
         </Modal.Body>
       </Modal>
-      <div className="row ">
-        <div className="col-md-3"></div>
-        <div className="sign-up-role col-md-4">
+      <div  className="role-and-image">
+        <div className="sign-up-role">  
           <h1>{getLanguageConstant(lang, "CharityInstitution")}</h1>
         </div>
-        <img src={Charity} className="col-md-1" alt="disabled" />
+        <div>
+          <img src={Charity} className="col-md-1" alt="Charity Institution" />
+        </div>
       </div>
-      <Form className="form-sign-up-labels">
+      <Form className="form">
         <Form.Group className="mb-3" controlId="formName">
           <DynamicFormLabel
             lang={lang}
