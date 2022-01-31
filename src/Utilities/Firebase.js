@@ -20,13 +20,13 @@ import { getLanguageError } from "../Utilities/Helpers";
 // };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCkyxPPiKIZasyePwUlrKMZr4q4eyUkwRY",
-  authDomain: "salam-staging.firebaseapp.com",
-  projectId: "salam-staging",
-  storageBucket: "salam-staging.appspot.com",
-  messagingSenderId: "836740903007",
-  appId: "1:836740903007:web:ef4ee12156439bca7aabea",
-  measurementId: "G-B3XPTN5RW4"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASURMENT_ID
 };
 
 firebase.initializeApp(firebaseConfig);
