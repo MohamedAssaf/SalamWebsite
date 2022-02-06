@@ -4,14 +4,16 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import logo from "../../../Assets/SLogo1.png";
 import { getLanguageConstant } from "../../../Utilities/Helpers";
 import { useRecoilState } from "recoil";
-import { websiteLanguageState } from "../../../RecoilResources/Atoms";
-
+import { websiteLanguageState, websiteDirectionState } from "../../../RecoilResources/Atoms";
 import "./Header.css";
+
 const Header = function () {
+
   const [lang] = useRecoilState(websiteLanguageState);
+  const [direction] = useRecoilState(websiteDirectionState);
 
   return (
-    <div className="header">
+    <div className="header" style={{direction: `${direction}`}}>
       <Navbar bg="light" expand="lg">
 
         <Container>
