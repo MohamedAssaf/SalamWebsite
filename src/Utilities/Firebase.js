@@ -11,7 +11,7 @@ import configData from '../Config';
 let firebaseConfig = {
   apiKey: configData.API_KEY,
   authDomain: configData.AUTH_DOMAIN,
-  databaseURL: configData.DATWABASE_URL,
+  databaseURL: configData.DATABASE_URL,
   projectId: configData.PROJECT_ID,
   storageBucket: configData.STORAGE_BUCKET,
   messagingSenderId: configData.MESSAGING_SENDER_ID,
