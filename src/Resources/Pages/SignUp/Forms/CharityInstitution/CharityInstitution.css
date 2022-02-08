@@ -36,3 +36,13 @@
     width: 90%;
   }
 }
+
+@media only screen and (max-device-width: 450px) { 
+  .sign-up-role {
+    width: 100%;
+  }
+
+  .charity-image {
+    max-width: 40%;
+  }
+}

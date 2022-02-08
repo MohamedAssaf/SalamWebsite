@@ -148,9 +148,8 @@ const VolunteerForm = function () {
         <div>
           <img
             src={volunteer}
-            className="col-md-3"
+            className="col-md-3 volunteer-image"
             alt="volunteer"
-            style={{marginRight: "auto", marginLeft: "auto"}}
           />
         </div>
       </div>

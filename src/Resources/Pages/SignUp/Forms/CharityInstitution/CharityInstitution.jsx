@@ -98,7 +98,7 @@ const CharityInstitutionForm = function () {
           <h1>{getLanguageConstant(lang, "CharityInstitution")}</h1>
         </div>
         <div>
-          <img src={Charity} className="col-md-1" alt="Charity Institution" />
+          <img src={Charity} className="col-md-1 charity-image" alt="Charity Institution" />
         </div>
       </div>
       <Form className="form">
