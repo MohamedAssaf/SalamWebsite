@@ -2,6 +2,27 @@
   width: 60%;
 } */
 
+.form {
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+.form-control {
+  width: 70%;
+}
+
+.role-and-image {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sign-up-role {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .modal-body-charity {
   display: flex;
   flex-direction: column;
@@ -13,5 +34,15 @@
 @media only screen and (max-device-width: 768px) {
   .charity-form {
     width: 90%;
+  }
+}
+
+@media only screen and (max-device-width: 450px) { 
+  .sign-up-role {
+    width: 100%;
+  }
+
+  .charity-image {
+    max-width: 40%;
   }
 }

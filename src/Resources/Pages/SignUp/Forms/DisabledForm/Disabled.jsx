@@ -141,12 +141,13 @@ const DisabledForm = function () {
           Please wait while we validate your data
         </Modal.Body>
       </Modal>
-      <div className="row">
-        <div className="col-md-1"></div>
-        <div className="sign-up-role col-md-4">
+      <div >
+        <div>
           <h1>{getLanguageConstant(lang, "Disabled")}</h1>
         </div>
-        <img src={disabilities} className="col-md-4" alt="disabled" />
+        <div>
+          <img src={disabilities} className="col-md-5" alt="disabled" />
+        </div>
       </div>
       <Form className="form-sign-up-labels">
         <Form.Group className="mb-3" controlId="formName">

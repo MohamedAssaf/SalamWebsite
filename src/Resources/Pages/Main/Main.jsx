@@ -32,7 +32,7 @@ const Main = function () {
         backgroundImage: `url(${backgroundDot})`,
         backgroundSize: "50px",
       }}
-    >
+    > 
       <div className="intro">
         <img src={logo} width={350} alt="logo"></img>
         <br />
