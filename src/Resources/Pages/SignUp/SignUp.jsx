@@ -1,5 +1,4 @@
 import "./SignUp.css";
-import backgroundDot from "../../../Assets/salam_background_edited1.png";
 import { useState } from "react";
 import { VolunteerForm, DisabledForm, CharityInstForm } from './Forms';
 import * as _ from "lodash";
@@ -23,10 +22,6 @@ const SignUp = function () {
   return (
     <div
       className="Body"
-      style={{
-        backgroundImage: `url(${backgroundDot})`,
-        backgroundSize: "50px",
-      }}
     >
       <div className="sign-up-form">{renderFormType()}</div>
     </div>

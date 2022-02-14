@@ -1,5 +1,4 @@
 import React from "react";
-import backgroundDot from "../../../Assets/salam_background_edited1.png";
 import "./About.css";
 import { useRecoilState } from "recoil";
 import { websiteLanguageState } from "../../../RecoilResources/Atoms";
@@ -11,10 +10,6 @@ const About = function () {
   return (
     <div
       className="Body"
-      style={{
-        backgroundImage: `url(${backgroundDot})`,
-        backgroundSize: "50px",
-      }}
     >
       <AboutUs
         title={getLanguagePhrase(lang, "Story")}
