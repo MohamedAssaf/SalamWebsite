@@ -11,12 +11,12 @@ function App() {
         <Header className="header"></Header>
         <Router className="body">
           <Switch>
-            <Route path="/about">
+            {/* <Route path="/about">
               <About />
             </Route>
             <Route path="/sign_up">
               <SignUp />
-            </Route>
+            </Route> */}
             <Route path="/">
               <Main />
             </Route>

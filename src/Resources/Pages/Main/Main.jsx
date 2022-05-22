@@ -9,6 +9,7 @@ import { SignUpBar } from "../../Components";
 import visionLogo from '../../../Assets/roundWorldResize.png';
 import missionLogo from '../../../Assets/mission.jpeg';
 import swal from "sweetalert";
+import ComingSoon from "../../Components/ComingSoon/ComingSoon";
 
 const Main = function () {
   const [lang] = useRecoilState(websiteLanguageState);
@@ -28,7 +29,7 @@ const Main = function () {
     <div
       className="Body"
     > 
-      <div className="intro">
+      {/* <div className="intro">
         <img src={logo} width={350} alt="logo"></img>
         <br />
         <p className="sub-text">{getLanguagePhrase(lang, "contactUs")}</p>
@@ -52,8 +53,8 @@ const Main = function () {
           },
         ]}
       />
-      <SignUpBar />
-
+      <SignUpBar /> */}
+      <ComingSoon/>
     </div>
   );
 };
