@@ -32,7 +32,8 @@ export const englishConstants = {
   ChooseFile: "Choose a file",
   ThankYou: "Thank you so much!",
   ThankYouBody: "ًWe're honoured you want to join us! Your application will be reviewed and someone from our team will contact you, SALAM.",
-  ReleaseDate: '1-1-2023'
+  ReleaseDate: '1-1-2023',
+  ContactUs: 'contact us at m@salam-eg.org'
 };
 
 export const arabicConstants = {
@@ -70,5 +71,6 @@ export const arabicConstants = {
   ThankYou: "متشكرين جدا ليكم! ",
   ThankYouBody: "متشرفين أنكم حابين تنضموا لينا, في حد من فريقنا هايرجع طلبكم و يتواصل معاكم. سلام",
   ReleaseDate: '١-١-٢٠٢٣',
+  ContactUs: 'تواصلوا معانا على m@salam-eg.org '
 };
 
