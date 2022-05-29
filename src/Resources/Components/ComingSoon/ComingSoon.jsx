@@ -22,7 +22,7 @@ function ComingSoon() {
             <img src={logo} width={450} alt="logo"/>
             <hr/>
             <p style={{color: 'grey', marginTop: '-3%'}}>{getLanguageConstant(lang, 'ContactUs')}</p>
-            <p style={{fontSize: 'xx-large'}}>{getLanguageConstant(lang, 'ReleaseDate')}</p>
+            <p style={{fontSize: 'xx-large', fontWeight:""}}>{getLanguageConstant(lang, 'ReleaseDate')}</p>
         </div>
     );
 }
