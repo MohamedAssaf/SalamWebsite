@@ -24,10 +24,10 @@ const About = function () {
         title={getLanguagePhrase(lang, "HowCanYouPersistThis")}
         description={getLanguagePhrase(lang, "Future")}
       />
-      <AboutUs
+      {/* <AboutUs
         title={getLanguagePhrase(lang, "WhoandWhy")}
         description={getLanguagePhrase(lang, "Founder")}
-      />
+      /> */}
       <SignUpBar />
     </div>
   );
