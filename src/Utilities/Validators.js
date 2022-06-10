@@ -60,10 +60,8 @@ export let validatePhoneNumber = (number) => {
 export let validatePassword = (password) => {
   if (password && password.length > 0) {
     if (password.length >= 8) {
-      let re = new RegExp(
-        '^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*d)(?=.*[!#$%&? "]).*$'
-      );
-      if (re.test(String(password))) {
+      let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (passwordRegex.test(String(password))) {
         return {
           status: 1,
         };
